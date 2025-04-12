@@ -20,5 +20,36 @@ namespace ListViewApp
         {
             InitializeComponent();
         }
+
+        private void New_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+
+        private void RemoveSel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NewRecord_Click(object sender, RoutedEventArgs e)
+        {
+            mainList.Items.Add(new {m_strPESEL = "12312312123",m_strName = "Marcin" });
+        }
     }
 }
