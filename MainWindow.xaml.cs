@@ -26,12 +26,15 @@ namespace ListViewApp
         public string? m_strName { get; set; }
         public string? m_strSecName { get; set; }
         public string? m_strSurname { get; set; }
+
+        public string? m_strBirthDate { get; set; }
         public Osoba() 
         {
             m_strPESEL = "00000000000";
             m_strName = "";
             m_strSecName = "";
             m_strSurname = "";
+            m_strBirthDate = "0000.00.00";
         }
     }
 
@@ -134,16 +137,18 @@ namespace ListViewApp
 
             AddStudent wnd = new();
             wnd.ShowDialog();
-
-            MessageBox.Show(wnd.dataUrodzenia.ToString().Split()[0]);
-
-
-            Osoba uczen = new ();
-            Random random = new Random();
-            uczen.m_strPESEL = random.Next().ToString();
-            uczen.m_strName = "Marcin";
-            uczen.m_strSurname = "Kowalski";
-            mainList.Items.Add(uczen);
+                        
+            if(wnd.saveMode > 0)
+            {
+                Osoba uczen = new ();
+                uczen.m_strPESEL = wnd.strPESEL.Text;
+                uczen.m_strName = wnd.strName.Text;
+                uczen.m_strSecName = wnd.strSecName.Text;
+                uczen.m_strSurname = wnd.strSurname.Text;
+                uczen.m_strBirthDate = wnd.dataUrodzenia.ToString().Split()[0];
+                mainList.Items.Add(uczen);
+            }
+            
         }
     }
 }
