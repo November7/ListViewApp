@@ -11,13 +11,30 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
-using System;
+
 
 namespace ListViewApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+    class Osoba
+    {
+        public string? m_strPESEL { get; set; }
+        public string? m_strName { get; set; }
+        public string? m_strSecName { get; set; }
+        public string? m_strSurname { get; set; }
+        public Osoba() 
+        {
+            m_strPESEL = "00000000000";
+            m_strName = "";
+            m_strSecName = "";
+            m_strSurname = "";
+        }
+    }
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -34,6 +51,8 @@ namespace ListViewApp
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Pliki CSV z separatorem (,) |*.csv|Pliki CSV z separatorem (;) |*.csv";
+            openFileDialog.Title = "Otwórz plik CSV";
+
             if (openFileDialog.ShowDialog() == true)
             {
                 mainList.Items.Clear();
@@ -51,18 +70,16 @@ namespace ListViewApp
                     var lines = File.ReadAllLines(filePath,encoding);
                     foreach (var line in lines)
                     {
-                        var columns = line.Split(delimiter);
-
-
-                        mainList.Items.Add(new
+                        string[] columns = line.Split(delimiter);
+                        if (columns != null)
                         {
-                            m_strPESEL = columns.ElementAtOrDefault(0),
-                            m_strName = columns.ElementAtOrDefault(1),
-                            m_strSecName = columns.ElementAtOrDefault(2),
-                            m_strSurname = columns.ElementAtOrDefault(3)
-                        });
-
-
+                            Osoba uczen = new();
+                            uczen.m_strPESEL = columns.ElementAtOrDefault(0);
+                            uczen.m_strName = columns.ElementAtOrDefault(1);
+                            uczen.m_strSecName = columns.ElementAtOrDefault(2);
+                            uczen.m_strSurname = columns.ElementAtOrDefault(3);
+                            mainList.Items.Add(uczen);
+                        }
                     }
                 }
             }
@@ -72,6 +89,30 @@ namespace ListViewApp
         private void Save_Click(object sender, RoutedEventArgs e)
         {
 
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = "Pliki CSV z separatorem (,) |*.csv|Pliki CSV z separatorem (;) |*.csv";
+            saveFileDialog.Title = "Zapisz plik CSV";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {                
+                string filePath = saveFileDialog.FileName;
+                string delimiter = ";";
+                if(saveFileDialog.FilterIndex == 1)
+                {
+                    delimiter = ",";
+                }
+
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {                    
+                    foreach (Osoba item in mainList.Items)
+                    {  
+                        var row = $"{item.m_strPESEL}{delimiter}{item.m_strName}" +
+                            $"{delimiter}{item.m_strSecName}{delimiter}{item.m_strSurname}";
+                        writer.WriteLine(row);
+                    }
+                }
+            }     
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -82,12 +123,27 @@ namespace ListViewApp
 
         private void RemoveSel_Click(object sender, RoutedEventArgs e)
         {
-
+            while(mainList.SelectedItems.Count > 0)
+            {
+                mainList.Items.Remove(mainList.SelectedItems[0]);
+            }
         }
 
         private void NewRecord_Click(object sender, RoutedEventArgs e)
         {
-            mainList.Items.Add(new {m_strPESEL = "12312312123",m_strName = "Marcin" });
+
+            AddStudent wnd = new();
+            wnd.ShowDialog();
+
+            MessageBox.Show(wnd.dataUrodzenia.ToString().Split()[0]);
+
+
+            Osoba uczen = new ();
+            Random random = new Random();
+            uczen.m_strPESEL = random.Next().ToString();
+            uczen.m_strName = "Marcin";
+            uczen.m_strSurname = "Kowalski";
+            mainList.Items.Add(uczen);
         }
     }
 }

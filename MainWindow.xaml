@@ -21,7 +21,7 @@
             </MenuItem>
 
         </Menu>
-        <ListView x:Name="mainList" Margin="0,20,0,20">            
+        <ListView x:Name="mainList" Margin="0,20,0,20" SelectionMode="Extended">            
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
