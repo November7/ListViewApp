@@ -31,10 +31,11 @@
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
                     <Setter Property="Padding" Value="5,0,0,0"/>
+                    <Setter Property="IsHitTestVisible" Value="False"/>
                 </Style>
             </ListView.Resources>
             <ListView.View>
-                <GridView>
+                <GridView AllowsColumnReorder="False">
                     <GridViewColumn Header="PESEL" DisplayMemberBinding="{Binding m_strPESEL}" Width="150"/>
                     <GridViewColumn Header="Imię" DisplayMemberBinding="{Binding m_strName}" Width="150"/>
                     <GridViewColumn Header="Drugie imię" DisplayMemberBinding="{Binding m_strSecName}" Width="150"/>

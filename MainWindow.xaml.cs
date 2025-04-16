@@ -138,7 +138,7 @@ namespace ListViewApp
             AddStudent wnd = new();
             wnd.ShowDialog();
                         
-            if(wnd.saveMode > 0)
+            //if(wnd.saveMode > 0)
             {
                 Osoba uczen = new ();
                 uczen.m_strPESEL = wnd.strPESEL.Text;

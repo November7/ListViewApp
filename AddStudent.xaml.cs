@@ -28,17 +28,17 @@ namespace ListViewApp
         public int checkFields()
         {
             int ret = 0;
-            if (strName.Text == "") ret += 1;
+            if (strName.Text != "") ret += 1;
             //if (strSecName.Text == "") return false;
-            if (strSurname.Text == "") ret += 2;
-            if (strPESEL.Text == "") ret += 4;
+            if (strSurname.Text != "") ret += 2;
+            if (strPESEL.Text != "") ret += 4;
             return ret;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             saveMode = checkFields();
-            if(saveMode == 7)
+            if (saveMode == 7)
             {
 
                 Close();    
