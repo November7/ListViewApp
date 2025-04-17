@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListViewApp"
         mc:Ignorable="d"
-        Title="AddStudent" Height="366" Width="547">
+        Title="AddStudent" Height="350" Width="550" MinWidth="550" MinHeight="350" MaxWidth="550" MaxHeight="350">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

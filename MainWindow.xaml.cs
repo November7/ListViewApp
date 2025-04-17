@@ -138,16 +138,15 @@ namespace ListViewApp
             AddStudent wnd = new();
             wnd.ShowDialog();
                         
-            //if(wnd.saveMode > 0)
-            {
-                Osoba uczen = new ();
-                uczen.m_strPESEL = wnd.strPESEL.Text;
-                uczen.m_strName = wnd.strName.Text;
-                uczen.m_strSecName = wnd.strSecName.Text;
-                uczen.m_strSurname = wnd.strSurname.Text;
-                uczen.m_strBirthDate = wnd.dataUrodzenia.ToString().Split()[0];
-                mainList.Items.Add(uczen);
-            }
+            
+            Osoba uczen = new ();
+            uczen.m_strPESEL = wnd.strPESEL.Text;
+            uczen.m_strName = wnd.strName.Text;
+            uczen.m_strSecName = wnd.strSecName.Text;
+            uczen.m_strSurname = wnd.strSurname.Text;
+            uczen.m_strBirthDate = wnd.dataUrodzenia.ToString().Split()[0];
+            mainList.Items.Add(uczen);
+            
             
         }
     }
