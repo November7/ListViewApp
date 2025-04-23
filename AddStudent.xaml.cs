@@ -129,7 +129,7 @@ namespace ListViewApp
             }
             if (errorCount > 0)
             {
-                MessageBox.Show("Wypełnij wszystkie wymagane pola!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("Wypełnij wszystkie wymagane pola!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -143,7 +143,7 @@ namespace ListViewApp
 
             if (!checkPesel())
             {
-                MessageBox.Show("Nieprawidłowy numer PESEL", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                //MessageBox.Show("Nieprawidłowy numer PESEL", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

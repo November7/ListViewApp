@@ -31,7 +31,7 @@
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
                     <Setter Property="Padding" Value="5,0,0,0"/>
-<!--                    <Setter Property="IsHitTestVisible" Value="False"/> -->
+                    <Setter Property="IsHitTestVisible" Value="False"/>
                 </Style>
             </ListView.Resources>
             <ListView.View>

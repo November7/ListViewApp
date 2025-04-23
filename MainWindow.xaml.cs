@@ -139,14 +139,15 @@ namespace ListViewApp
             wnd.ShowDialog();
                         
             
-            Osoba uczen = new ();
-            uczen.m_strPESEL = wnd.strPESEL.Text;
-            uczen.m_strName = wnd.strName.Text;
-            uczen.m_strSecName = wnd.strSecName.Text;
-            uczen.m_strSurname = wnd.strSurname.Text;
-            uczen.m_strBirthDate = wnd.dataUrodzenia.ToString().Split()[0];
+            
             if (wnd.m_bCloseMode == 1)
             {
+                Osoba uczen = new();
+                uczen.m_strPESEL = wnd.strPESEL.Text;
+                uczen.m_strName = wnd.strName.Text;
+                uczen.m_strSecName = wnd.strSecName.Text;
+                uczen.m_strSurname = wnd.strSurname.Text;
+                uczen.m_strBirthDate = wnd.dataUrodzenia.ToString().Split()[0];
                 mainList.Items.Add(uczen);
             }
             
