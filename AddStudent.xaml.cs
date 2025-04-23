@@ -30,7 +30,12 @@ namespace ListViewApp
 
     public partial class AddStudent : Window
     {
-        public int saveMode = 0;
+        public int m_bCloseMode = 0;
+        Color m_warnBgColor = Colors.Red;  
+        Color m_warnFgColor = Colors.White;  
+        Color m_placeholderFgColor = Colors.LightGray;
+        Color m_stdBgColor = Colors.White;
+        Color m_stdFgColor = Colors.Black;
 
         private Dictionary<TextBox, TextBoxMetadata> textBoxDictionary = new Dictionary<TextBox, TextBoxMetadata>();
 
@@ -52,8 +57,8 @@ namespace ListViewApp
                     if (!textBoxDictionary[textBox].IsSet)
                     {
                         textBox.Text = "";
-                        textBox.Foreground = new SolidColorBrush(Colors.Black);
-                        textBox.Background = new SolidColorBrush(Colors.White);
+                        textBox.Foreground = new SolidColorBrush(m_stdFgColor);
+                        textBox.Background = new SolidColorBrush(m_stdBgColor);
                         textBoxDictionary[textBox].IsSet = true;
                     }
                 };
@@ -70,23 +75,62 @@ namespace ListViewApp
             void setPlaceholder(TextBox textBox, string placeholder)
             {
                 textBox.Text = placeholder;
-                textBox.Foreground = new SolidColorBrush(Colors.LightGray);
-                textBox.Background = new SolidColorBrush(Colors.White);
+                textBox.Foreground = new SolidColorBrush(m_placeholderFgColor);
+                textBox.Background = new SolidColorBrush(m_stdBgColor);
             }
 
         }
 
-      
+        private bool checkPesel()
+        {
+            string pesel = strPESEL.Text;
+            strPESEL.Background = new SolidColorBrush(m_warnBgColor);
+            strPESEL.Foreground = new SolidColorBrush(m_warnFgColor);
+            if (pesel.Length != 11)
+            {
+                
+                return false;
+            }
+            if (!long.TryParse(pesel, out _))
+            {
+                
+                return false;
+            }
+
+            int[] weights = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
+            int sum = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                sum += (pesel[i] - '0') * weights[i];
+            }
+            int controlDigit = (10 - (sum % 10)) % 10;
+            if (controlDigit != (pesel[10] - '0'))
+            {
+                
+                return false;
+            }
+            strPESEL.Background = new SolidColorBrush(m_stdBgColor);
+            strPESEL.Foreground = new SolidColorBrush(m_stdFgColor);
+            return true;
+        }
+
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            int errorCount = 0;
             foreach (var textBox in textBoxDictionary.Keys)
             {
                 if (textBoxDictionary[textBox].IsRequired && !textBoxDictionary[textBox].IsSet)
                 {
-                    textBox.Background = new SolidColorBrush(Colors.Red);
-                    return;
+                    textBox.Background = new SolidColorBrush(m_warnBgColor);
+                    errorCount++;
+                    
                 }
+            }
+            if (errorCount > 0)
+            {
+                MessageBox.Show("Wypełnij wszystkie wymagane pola!", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
             foreach (var textBox in textBoxDictionary.Keys)
@@ -96,6 +140,14 @@ namespace ListViewApp
                     textBox.Text = "";
                 }
             }
+
+            if (!checkPesel())
+            {
+                MessageBox.Show("Nieprawidłowy numer PESEL", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            m_bCloseMode = 1;
             Close();            
         }        
     }

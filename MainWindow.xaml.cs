@@ -145,7 +145,10 @@ namespace ListViewApp
             uczen.m_strSecName = wnd.strSecName.Text;
             uczen.m_strSurname = wnd.strSurname.Text;
             uczen.m_strBirthDate = wnd.dataUrodzenia.ToString().Split()[0];
-            mainList.Items.Add(uczen);
+            if (wnd.m_bCloseMode == 1)
+            {
+                mainList.Items.Add(uczen);
+            }
             
             
         }

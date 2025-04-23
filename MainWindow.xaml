@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ListViewApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200">
+        Title="MainWindow" Height="800" Width="1200" MinHeight="800" MinWidth="1200">
     <Grid>
         <Menu x:Name="menu" VerticalAlignment="Top">
             <MenuItem Header="File">
@@ -31,7 +31,7 @@
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
                     <Setter Property="Padding" Value="5,0,0,0"/>
-                    <Setter Property="IsHitTestVisible" Value="False"/>
+<!--                    <Setter Property="IsHitTestVisible" Value="False"/> -->
                 </Style>
             </ListView.Resources>
             <ListView.View>
